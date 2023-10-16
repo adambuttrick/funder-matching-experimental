@@ -60,9 +60,8 @@ def main():
     args = parse_arguments()
     data = read_data_from_csv(args.input_csv)
     counts, percentages = count_doi_asserted_by_values(data)
-    output_dir = os.path.dirname(args.input_csv)
-    input_file_name = os.path.basename(args.input_csv).split('.')[
-        0]
+    output_dir = os.getcwd()
+    input_file_name = os.path.basename(args.input_csv).split('.')[0]
     for key in counts.keys():
         filter_and_write_csv(data, output_dir, input_file_name, key)
     write_summary_file(counts, percentages, output_dir, input_file_name)
