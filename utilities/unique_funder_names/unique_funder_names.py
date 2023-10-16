@@ -1,3 +1,4 @@
+import re
 import csv
 import argparse
 from statistics import mode
@@ -19,13 +20,18 @@ def parse_csv(input_file_path):
         return list(reader)
 
 
+def clean_name(name):
+    return re.sub(r'\s+', ' ', name)
+
+
 def analyze_data(data):
-    funder_info = defaultdict(lambda: {"count": 0, "names": set()})
+    funder_info = defaultdict(lambda: set())
     for row in data:
         doi = row["Funder DOIs"]
-        name = row["Funder Names"]
-        funder_info[doi]["count"] += 1
-        funder_info[doi]["names"].add(name)
+        name = row["Funder Names"].strip()
+        name = clean_name(name)
+        if name:
+            funder_info[doi].add(name)
     return funder_info
 
 
@@ -33,13 +39,15 @@ def write_to_csv(funder_info, output_file_path):
     with open(output_file_path, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['Funder DOI', 'Unique Count', 'Funder Names'])
-        for doi, info in funder_info.items():
-            names = "; ".join(info["names"])
-            writer.writerow([doi, info["count"], names])
+        for doi, names in funder_info.items():
+            count = len(names)
+            names = "; ".join(names)
+            print(doi, count, names)
+            writer.writerow([doi, count, names])
 
 
 def calculate_metrics(funder_info):
-    counts = [info["count"] for _, info in funder_info.items()]
+    counts = [len(v) for k, v in funder_info.items()]
     average = sum(counts) / len(counts) if counts else 0
     sorted_counts = sorted(counts)
     mid = len(sorted_counts) // 2
@@ -56,11 +64,10 @@ def calculate_metrics(funder_info):
         else:
             upper_bound = 2 * lower_bound - 1
         range_key = f"{lower_bound}-{upper_bound}"
-        ranges[range_key] = sum(1 for count in counts if lower_bound <= count <= upper_bound)
+        ranges[range_key] = sum(
+            1 for count in counts if lower_bound <= count <= upper_bound)
         lower_bound = upper_bound + 1
     return average, median, mode_value, ranges
-
-
 
 
 def write_metrics(average, median, mode_value, ranges, filename):
