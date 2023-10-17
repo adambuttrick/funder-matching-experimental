@@ -69,14 +69,8 @@ def get_all_names_and_funder_id_assignments(record):
     return all_names, funder_ids
 
 
-def get_mapped_ids(mapping_file):
-    with open(mapping_file, 'r') as f_in:
-        return [line.strip() for line in f_in]
-
-
 # See https://zenodo.org/communities/ror-data/ for the latest data dump
 def data_dump_to_training_data(data_dump_file, output_file):
-    mapped_funders = get_mapped_ids(mapping_file)
     with open(data_dump_file, 'r+') as f_in:
         ror_records = json.load(f_in)
         for record in ror_records:
