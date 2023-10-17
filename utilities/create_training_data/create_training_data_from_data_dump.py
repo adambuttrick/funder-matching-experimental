@@ -75,7 +75,7 @@ def get_mapped_ids(mapping_file):
 
 
 # See https://zenodo.org/communities/ror-data/ for the latest data dump
-def json_files_to_training_data(data_dump_file, output_file):
+def data_dump_to_training_data(data_dump_file, output_file):
     mapped_funders = get_mapped_ids(mapping_file)
     with open(data_dump_file, 'r+') as f_in:
         ror_records = json.load(f_in)
