@@ -89,7 +89,7 @@ def parse_arguments():
     parser.add_argument(
         '-i', '--input', help='ROR data dump file', required=True)
     parser.add_argument(
-        '-o', '--output', help='Output CSV file', default='training_data.csv')
+        '-o', '--output', help='Output CSV file', default='ror_data_dump_training_data.csv')
     return parser.parse_args()
 
 
