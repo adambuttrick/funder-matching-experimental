@@ -85,17 +85,17 @@ def data_dump_to_training_data(data_dump_file, output_file):
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
-        description='Generate fake affiliation training data from the ROR data dump file.')
+        description='Generate training data from the ROR data dump file.')
     parser.add_argument(
-        '-i', '--input', help='ROR data dump file', required=True)
+        '-d', '--data_dump', help='ROR data dump file', required=True)
     parser.add_argument(
-        '-o', '--output', help='Output CSV file', default='ror_data_dump_training_data.csv')
+        '-o', '--output_file', help='Output CSV file', default='ror_data_dump_training_data.csv')
     return parser.parse_args()
 
 
 def main():
     args = parse_arguments()
-    data_dump_to_training_data(args.input, args.output)
+    data_dump_to_training_data(args.data_dump, args.output_file)
 
 
 if __name__ == '__main__':
