@@ -53,7 +53,7 @@ def get_record_name(record, key):
     return get_record_value(record, key, process_func=lambda x: x.get('label'))
 
 
-def get_all_names_and_funder_id_assignments(record):
+def get_all_names(record):
     funder_ids = []
     primary_name = preprocess_primary_name(record.get('name', ''))
     aliases = get_record_value(record, 'aliases')
@@ -63,14 +63,12 @@ def get_all_names_and_funder_id_assignments(record):
     all_names = [normalize_text(name)
                  for name in all_names if check_latin_chars(name)]
     external_ids = record['external_ids']
-    if 'FundRef' in external_ids:
-        funder_ids = external_ids['FundRef']['all']
-        funder_ids = [f'http://dx.doi.org/10.13039/{funder_id}' for funder_id in funder_ids]
-    return all_names, funder_ids
+    return all_names
 
 
 # See https://zenodo.org/communities/ror-data/ for the latest data dump
 def data_dump_to_training_data(data_dump_file, output_file):
+    training_data = {}
     with open(data_dump_file, 'r+') as f_in:
         ror_records = json.load(f_in)
         for record in ror_records:
@@ -79,6 +77,7 @@ def data_dump_to_training_data(data_dump_file, output_file):
                 training_data[ror_id] = get_all_names(record)
     with open(output_file, 'w') as f_out:
         writer = csv.writer(f_out)
+        writer.writerow(['ror_id', 'label'])
         for key, values in training_data.items():
             for value in values:
                 writer.writerow([key, value])
