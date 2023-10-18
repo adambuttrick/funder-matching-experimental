@@ -1,16 +1,29 @@
-# fastext_test
-Return fasttext matches matches for a given CSV file and compare to assigned ROR IDs.
+# fasttext_test
 
-## setup
-````
-pip install -r requirements.txt
-````
-[Download the model files from Hugging Face](https://huggingface.co/poodledude/ror-predictor/tree/main) and place in a directory called  "models."
+Return funder matches for a given CSV file based on fasttext model predictions.
 
-## usage
-Prepare a CSV file containing funder name strings and assigned ROR IDs. Label the funder name string column "funder name."
 
-Run the script with the required arguments:
-````
-$ python fastext_test.py -i <input_file> [-o <output_file>] [-c <confidence_level>]
-````
+## Usage
+
+```
+python <fasttext_test>.py -i INPUT_CSV -m MAPPING_JSON [-o OUTPUT_CSV] [-p MIN_PROBABILITY]
+```
+
+### Arguments
+
+- `-i, --input`: Input CSV file. **Required**
+- `-m, --mapping_file`: Mapping JSON file returned from `create_ror_funder_id_mapping_concatenated.py`. **Required**
+- `-o, --output`: Output CSV file. Default is `fasttext_results.csv`.
+- `-p, --min_fasttext_probability`: Minimum probability level for the fasttext predictor. Default is `0.8`.
+
+### Input CSV Format
+
+Ensure that the input CSV has a column named `funder_name`.
+
+### Output
+
+Generates a CSV with columns:
+- Existing columns from the input file.
+- `predicted_ror_id`: The predicted ROR ID based on the `funder_name`.
+- `prediction_score`: Score for the prediction.
+- `predicted_funder_ids`: Mapped funder IDs from the mapping file.
