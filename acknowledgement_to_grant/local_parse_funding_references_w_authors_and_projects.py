@@ -84,7 +84,7 @@ Input:
 """
 	content = f'{prompt} Authors: "{authors}" | Funding statement: "{funding_statement}"'
 	data = {
-	"model": "mistral-openorca",
+	"model": "openchat",
 	"prompt": content,
 	"format": "json",
 	"stream": False
