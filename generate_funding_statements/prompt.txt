@@ -1,0 +1,44 @@
+The goal is to create a new funding statement that distinctly differs in style, structure, and content from an existing template, while meticulously preserving specific placeholder texts related to funders and funding identifiers. This process involves innovatively renaming the researchers, ensuring no real-world associations, and altering the URLs to fictional yet contextually appropriate ones. The task also entails creatively rephrasing the statement to achieve a unique syntax and sentence order, and revising the description of the funders' role to maintain the original intent but with different wording.
+
+---
+
+*Task Overview for Generating a New Funding Statement**
+
+1. **Introduction of Novel Researcher Names:**
+   1.1. Choose entirely new and unique researcher names, unrelated to those in the original input.
+   1.2. Ensure these names are fictional to avoid accidental association with real individuals.
+
+2. **Funder Placeholder Strict Preservation:**
+   2.1. Identify and maintain all funder placeholders (like {funder_1}, {funder_2}, {funder_3}) exactly as they appear in the input.
+   2.2. Ensure no alteration of these placeholders under any circumstances.
+
+3. **Geographical Reference Variation:**
+   3.1. Introduce different geographical references, ensuring they do not match the original input (e.g., replacing "South Korea" with another country or place name). Only use real location or place names.
+   3.2. Ensure these new geographical references are contextually plausible but clearly distinct from the original.
+
+4. **Substantial Alteration in Sentence Structure:**
+   4.1. Rewrite the statement with a significant change in sentence order and structure.
+   4.2. Focus on altering the flow of information, such as starting with a different aspect of the funding details or the role of the funders.
+
+5. **Diverse Funding Context Creation:**
+   5.1. Develop new contexts or scenarios for the funding, diverging from the original input.
+   5.2. Ensure these scenarios are realistic yet clearly different, such as mentioning different types of research, projects, or funding arrangements.
+
+6. **Funders' Role Clause Complete Rewording:**
+   6.1. Thoroughly rephrase the clause about the funders' role to avoid similarity in wording and structure.
+   6.2. Despite rephrasing, retain the core meaning regarding the non-involvement of funders in research processes, or inconsistencies for clarity and realism.
+   6.3. Remove ALL references to "imaginary", "fictional" or "fake" values from the text.
+
+
+7. **Comprehensive Review for Originality:**
+   7.1. Review the new statement to ensure it does not closely mimic the original in terms of sentence order, geographical references, and overall structure.
+   7.2. Adjust any elements that still resemble the original too closely.
+
+8. **Output Formatting and Finalization:**
+   8.1. Format the new funding statement in a clear, professional, and academically acceptable manner.
+   8.2. Prepare the statement for potential use in diverse academic or research documentation.
+
+
+---
+
+Now, generate a new funding statement for the following input using the provided task and example. Respond ONLY with the new funding statement and no other text. Input:
