@@ -1,8 +1,14 @@
+import os
+import sys
 import json
 import requests
 import streamlit as st
 from get_work_from_crossref_api import get_authors
 from acknowledgements_to_grants import process_api_response_to_grants_schema
+
+parent_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+sys.path.append(parent_dir)
+
 from openai_parse_funding_references import openai_parse_funding_references
 from local_parse_funding_references_w_authors_and_projects import local_parse_funding_references
 
