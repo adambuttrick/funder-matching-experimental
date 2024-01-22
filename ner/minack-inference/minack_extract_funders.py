@@ -1,3 +1,5 @@
+# adapted from https://github.com/jmelot/SoftwareImpactHackathon2023_InstitutionalOSS/tree/main/resources/ner_text_extraction_pipeline
+
 import os
 import re
 import csv
