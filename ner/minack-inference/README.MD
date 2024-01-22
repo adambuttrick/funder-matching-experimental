@@ -1,5 +1,3 @@
-# README for Organisation Name Extractor and ROR ID Mapper
-
 ## Overview
 Extracts organization names and award numbers from text data using the [MinAck NER model](https://kalawinka.github.io/minack/) and maps these names to their respective ROR IDs using the ROR API.
 
