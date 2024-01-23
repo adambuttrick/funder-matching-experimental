@@ -57,14 +57,14 @@ def process_data(data):
         grouped_data[key].append(row)
     lines = []
     for key, group in grouped_data.items():
-        names = [entity for entity in group if entity['type'] == 'funder']
-        identifierations = [
+        funders = [entity for entity in group if entity['type'] == 'funder']
+        awards = [
             entity for entity in group if entity['type'] == 'award']
         tokens = tokenize_text(key[1])
         org_tags = tag_words(
-            tokens, names, start_tag='B-ORG', inside_tag='I-ORG')
+            tokens, funders, start_tag='B-ORG', inside_tag='I-ORG')
         identifier_tags = tag_words(
-            tokens, identifierations, start_tag='B-AWARD', inside_tag='I-AWARD')
+            tokens, awards, start_tag='B-AWARD', inside_tag='I-AWARD')
         final_tags = [org if org != 'O' else identifier for org,
                       identifier in zip(org_tags, identifier_tags)]
         if 'B-ORG' not in final_tags and 'I-ORG' not in final_tags:
