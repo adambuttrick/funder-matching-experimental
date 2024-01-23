@@ -30,8 +30,11 @@ def process_json_file(json_path):
             decoded_data = decode_data(byte_data)
             data = json.loads(decoded_data)
         extracted_data = []
+        dois = set()
         for item in data["items"]:
             doi = item.get("DOI", "")
+            if doi:
+                dois.add(doi)
             funders = item.get("funder", [])
             for funder in funders:
                 funder_doi = funder.get("DOI", "")
@@ -43,10 +46,10 @@ def process_json_file(json_path):
                     else:
                         awards = awards[0]
                 extracted_data.append([doi, funder_doi, funder_name, awards])
-        return extracted_data
+        return extracted_data, dois
     except Exception as e:
         print(f"Error processing file {json_path}: {e}")
-        return []
+        return [], set()
 
 
 def parse_arguments():
@@ -63,14 +66,22 @@ def parse_arguments():
 def main():
     args = parse_arguments()
     all_json_files = get_all_json_files(args.directory)
+    unique_dois = set()
+
     with open(args.output_csv, "w", newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(["DOI", "Funder DOI", "Funder Name", "Awards"])
+
         with Pool(args.threads) as pool:
             args_generator = (json_file for json_file in all_json_files)
-            for result in pool.imap(process_json_file, args_generator):
+            for result, dois in pool.imap(process_json_file, args_generator):
+                unique_dois.update(dois)
                 for record in result:
                     writer.writerow(record)
+
+    with open('unique_dois.txt', 'w') as file:
+        for doi in unique_dois:
+            file.write(f"{doi}\n")
 
 
 if __name__ == "__main__":
