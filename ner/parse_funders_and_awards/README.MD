@@ -16,6 +16,7 @@ Options:
 - `-t`, `--threads`: Determine the number of threads for parallel processing (default: 4).
 
 ## Outputs
+
 ### CSV File
 - Format: "DOI", "Funder DOI", "Funder Name", "Awards".
 
