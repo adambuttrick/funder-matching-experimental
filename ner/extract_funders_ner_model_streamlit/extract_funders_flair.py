@@ -4,7 +4,7 @@ from flair.data import Sentence
 from flair.models import SequenceTagger
 
 ROR_URL = "https://api.ror.org/organizations"
-MODEL_PATH = ''
+MODEL_PATH = 'flair/ner-english-large'
 model = SequenceTagger.load(MODEL_PATH)
 
 
@@ -12,6 +12,7 @@ def extract_organisation_names(text):
     org_tags = []
     sentence = Sentence(text)
     model.predict(sentence)
+    print(sentence.get_spans('ner'))
     names = {entity.text for entity in sentence.get_spans(
         'ner') if entity.tag == 'ORG'}
     return list(names)
